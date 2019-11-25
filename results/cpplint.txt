@@ -9,3 +9,4 @@ Done processing ./app/cam.cpp
 Done processing ./app/cascade.cpp
 Done processing ./app/main.cpp
 Done processing ./app/rectplot.cpp
+Total errors found: 4
