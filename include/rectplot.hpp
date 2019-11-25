@@ -27,8 +27,8 @@
  * SOFTWARE.
  */
 
-#ifndef _HOME_VARUN_ECLIPSE_WORKSPACE_OPENCV_INCLUDE_RECTPLOT_HPP_
-#define _HOME_VARUN_ECLIPSE_WORKSPACE_OPENCV_INCLUDE_RECTPLOT_HPP_
+#ifndef _INCLUDE_RECTPLOT_HPP_
+#define _INCLUDE_RECTPLOT_HPP_
 
 #include <Eigen/Dense>
 #include <iomanip>
@@ -36,17 +36,32 @@
 #include <iostream>
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
+#include <cam.hpp>
 
-class RectPlot {
+class RectPlot : public Cam {
  private:
-  int px;  ///< top left pixel x-coordinate of bounding rectangle
-  int py;  ///< top left pixel y-coordinate of bounding rectangle
-  int pw;  ///< pixel width of bounding rectangle
-  int ph;  ///< pixel height of bounding rectangle
+  int px; /**< top left pixel x-coordinate of bounding rectangle */
+  int py; /**< top left pixel y-coordinate of bounding rectangle */
+  int pw; /**< pixel width of bounding rectangle */
+  int ph; /**< pixel height of bounding rectangle */
 
  public:
   /**
-   * plot a rectangular envelop over a detected object
+   * @brief Check if camera feed is on
+   * @param x Cam&
+   * @param dPath string
+   * @return int
+   */
+  int feed(Cam &x, std::string dPath);
+  /**
+   * @brief Read image from video frame to plot rectange on it
+   * @param x Cam&
+   * @param img cv::Mat&
+   * @return int
+   */
+  int imgRead(Cam &x, cv::Mat &img);
+  /**
+   * @brief plot a rectangular envelop over a detected object
    * @param cv::Mat&
    * @param x int
    * @param y int
@@ -57,10 +72,10 @@ class RectPlot {
   int plot(cv::Mat&, int x, int y, int w, int h);
 
   /**
-   * convert image coordinates to world coordinate system
+   * @brief convert image coordinates to world coordinate system
    * @param cv::Mat&
    * @return int
    */
   int worldCord(cv::Mat&);
 };
-#endif  // _HOME_VARUN_ECLIPSE_WORKSPACE_OPENCV_INCLUDE_RECTPLOT_HPP_
+#endif  /* _INCLUDE_RECTPLOT_HPP_ */

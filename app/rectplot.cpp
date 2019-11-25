@@ -28,6 +28,29 @@
  */
 
 #include "rectplot.hpp"
+#include <Eigen/Dense>
+#include <iomanip>
+#include <string>
+#include <iostream>
+#include <opencv2/highgui/highgui.hpp>
+#include <opencv2/imgproc/imgproc.hpp>
+#include <cam.hpp>
+
+int RectPlot::feed(Cam &x, std::string dPath) {
+  if (x.readVideo(dPath)) {
+    return 2;
+  } else {
+    return 3;
+  }
+}
+
+int RectPlot::imgRead(Cam &x, cv::Mat &img) {
+  if (x.readFrameImage(img)) {
+    return 1;
+  } else {
+    return 0;
+  }
+}
 
 int RectPlot::plot(cv::Mat &img, int x, int y, int w, int h) {
   px = x;
@@ -43,7 +66,7 @@ int RectPlot::plot(cv::Mat &img, int x, int y, int w, int h) {
 }
 
 int RectPlot::worldCord(cv::Mat &img) {
-  double f = 28.0;  ///< effective focal length of robot's vision system
+  double f = 28.0; /**< effective focal length of robot's vision system */
   /**
    * As depth is not considered i.e. z=0, it is assumed that the
    * object is detected at a distance of 8ft (also 1ft = 304mm)
