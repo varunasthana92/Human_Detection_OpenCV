@@ -27,8 +27,8 @@
  * SOFTWARE.
  */
 
-#ifndef _HOME_VARUN_ECLIPSE_WORKSPACE_OPENCV_INCLUDE_CAM_HPP_
-#define _HOME_VARUN_ECLIPSE_WORKSPACE_OPENCV_INCLUDE_CAM_HPP_
+#ifndef _INCLUDE_CAM_HPP_
+#define _INCLUDE_CAM_HPP_
 
 #include <iostream>
 #include <string>
@@ -37,29 +37,31 @@
 
 class Cam {
  private:
-  cv::VideoCapture feed;  ///< variable to hold video input
+  cv::VideoCapture feed; /**< variable to hold video input */
 
  public:
   /**
-   * overloaded function to read video from a video file into feed
+   * @brief overloaded function to read video from a video file into feed
    * @param demoPath std::string
    * @return int
    */
-  int readVideo(std::string demoPath);
+  virtual int readVideo(std::string demoPath);
 
   /**
-   * read each frame of the video feed
+   * @brief read each frame of the video feed
    * @param cv::MAT&
    * @return int
    */
-  int readFrameImage(cv::Mat&);
+  virtual int readFrameImage(cv::Mat&);
 
   /**
-   * convert RBG image to grayscale
+   * @brief convert RBG image to grayscale
    * @param frameImage cv::Mat%
    * @param grayImage cv::Mat%
    * @return grayImgSize int
    */
   int color2gray(cv::Mat&, cv::Mat&);
+  virtual ~Cam() {
+  }
 };
-#endif  // _HOME_VARUN_ECLIPSE_WORKSPACE_OPENCV_INCLUDE_CAM_HPP_
+#endif  /* _INCLUDE_CAM_HPP_ */
