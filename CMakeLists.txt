@@ -12,7 +12,7 @@ if (COVERAGE)
     include(CodeCoverage)
     set(LCOV_REMOVE_EXTRA "'vendor/*'" "'include/Eigen/*'" "'opencv-3.3.0/*'")
     setup_target_for_coverage(code_coverage test/cpp-test coverage)
-    set(COVERAGE_SRCS app/main.cpp app/cam.cpp app/rectplot.cpp app/cascade.cpp include/cam.hpp include/rectplot.hpp include/cascade.hpp)
+    set(COVERAGE_SRCS app/main.cpp app/rectplot.cpp include/cam.hpp include/rectplot.hpp)
 
     SET(CMAKE_CXX_FLAGS "-g -O0 -fprofile-arcs -ftest-coverage")
     SET(CMAKE_C_FLAGS "-g -O0 -fprofile-arcs -ftest-coverage")
