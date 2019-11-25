@@ -7,28 +7,14 @@
 ---
 
 ## Overview
-Acme Robotics is developing a new series of robots to add to its portfolio– warehouse management robots (WMR). WMR's main function would be to carry goods from one place to another in a warehouse. One of the issue with such a market is: not all warehouses work on 100% automation, this means that WMRs would often be working in a workspace shared by humans. This raises the issue of safety for the humans working in the warehouse. As a safety counter-measure it is desired that WMRs should not collide with any human.
-
-To achieve the goal of coallision avoidance of WMRs with humans, Acme Robotics reached out to our team to provide a ready to install solution. Our team is developing a Human Detector (HD) module which will identenfy the presence of any human in the vicinity of the robot (in its field of view) and provide the coordinates of the detected human in the robot's coordinate system. These coordinates can then be used by other modules of the WMR developed by Acme Robotics, like-real time path planning module, to modify the travel path of the WMR to avoid any possibility of a collision.
-
-Our HD module works on the principles of supervised learning by utilizing Haar Cascade Classifier for object detection (humans in our case) from the OpenCV library. OpenCV library is covered under the 3-clause BSD License. HD module will use an on-board camera provided in the WMR to capture videos. But for our testing purposes, we will make use of a demo video. HD module will process the captured images (frame by frame) to detect the presence of any human, and then return their coordinates in the 2D-coordinate frame corresponding to the field of view of the robot. This data will contain bottom left (x,y) and top right (x,y) world coordinates of the enveloping rectangular box around the detected humans.
-
-<p align="center">
-<img src="https://github.com/varunasthana92/Human_Detection_OpenCV/blob/master/additional_files/expected_behaviour.png">
-Expected behavior of the HD Module (Images from: Machine Learning by Andrew Ng, Coursera)
-</p>
-
-## Approach
-The presence of humans in a video feed is detected by the use of Haar Cascade Classifier from the OpenCV library. Cascade functionality can be used to detect objects by importing a trained model XML file. These XML files can be of a pre-trained model or can be generated using command prompt utility of the OpenCV. For this project our team created a new model from scratch using pre-acquired training dataset. We will thus first higlight the steps to generate a new cascade model. Before we can proceed with the model generation, we first need to install OpenCV and related dependancies.
+To demonstrate the solitarty testing of a derived class, by mocking the base class via googlemock framework. In this example, the class "Cam" is being inherited by the class "RectPlot". RectPlot uses 2 functions of the Cam class, namely Cam::readVideo and Cam::readFrameImage. In order to do the unit testing of the class RectPlot without having any dependancy on the class Cam, googlemock framework has been utilized to mock the Cam class. 4 test cases in the file test/rectplottest.cpp have been made with a mocked class MockCam and an EXPECT_CALL macro to substitute for the return values of the Cam::readVideo and Cam::readFrameImage methods.
 
 ### Dependencies
 ```
 Eigen 3.3.7
 OpenCV 4.1.2
 ```
-Eigen has been provided in the repository. And install instructions for OpenCV are provided below.
-
-#### Installing OpenCV
+### Installing OpenCV
 ```
 $ sudo apt-get update
 $ sudo apt-get upgrade
@@ -55,110 +41,26 @@ $ python
 >>> exit()
 ```
 
-### How to create and train a Haar Cascade model
-For any deep learning based training and model generation the most important thing is to have a dataset of POSITIVE and NEGATIVE instances. In this case the postive instances refer to a set of images which contain human object(s) and negative instances refer to a set of images which do not contain humans. Positive dataset is taken from [Horses or Humans](https://www.kaggle.com/sanikamal/horses-or-humans-dataset) and negative dataset is taken from [INRIA Person Dataset](http://pascal.inrialpes.fr/data/human/).
-
-Follow the below steps-
-1) Create a directory <_model_> and cd into it.
-2) Download the images in two different folders namely, pos and neg.
-3) Label the positive images and create a info.lst file in the <pos> directory with entiries for each image to specify the object position: <_filename_> <no_of_instances> <left_top_x_coordinate> <left_top_y_coordinate> <_width_> <_height_>
-<p align="center">
-<img src="https://github.com/varunasthana92/Human_Detection_OpenCV/blob/master/additional_files/info_list.png">
-</p>
-
-4) In the <_model_> directory create a background text file "bgNeg.txt" with information of path of each negatives instances <filepath_filename>
-<p align="center">
-<img src="https://github.com/varunasthana92/Human_Detection_OpenCV/blob/master/additional_files/bgNeg.png">
-</p>
-
-
-5) From the <model> run the below command in terminal to generate a vector file. Lets name that file as "positives.vec". Here -w and -h are the training model parameters (ensure that the object in positive instances have similar width/height ratio for better performance)
-
+### How to download and build
 ```
-opencv_createsamples -info pos/info.lst -num 527 -w 36 -h 110 -vec positives.vec
-```
-
-6) mkdir data in <_model_>
-
-7) Lastly, tain your Haar Cascade Model from the <_model_> directory.
-```
-opencv_traincascade -data data -vec positives.vec -bg bgNeg.txt -numPos 500-numNeg 800 -numStages 10 -w 36 -h 110
-```
-8) Cascade.xml file will be generated in the "data" folder. You may now use this file with our repository by renaming it to "humanDetectCascade.xml" and place it in "app" folder (replacing the exsting one, provided by our team).
-
-Training is a time demanding and computationally expensive process. Larger the number of instances, traininig stages, -w and -h parametrs, the more time it takes. We used 527 positive instances with w=36 and h=110 over 10 stages, and it took 16hrs (approx.) for one model to train.
-
-# How to build
-```
-$ cd MidTermGroup-14
+$ git clone -b GMock_Extra_Credit https://github.com/varunasthana92/Human_Detection_OpenCV.git
+$ cd Human_Detection_OpenCV
 $ mkdir build
 $ cd build
 $ cmake ..
 $ make
 ```
-# How to run demo
+### How to run rectplottest test
 ```
-$ cd MidTermGroup-14
-$ cd build
-$ ./app/humanDetect
-```
-# How to run tests
-```
-$ cd MidTermGroup-14
+$ cd Human_Detection_OpenCV
 $ cd build
 $ ./test/cpp-test
 ```
-# Known issues/bugs
 
-1) With small set of training data, the quality of output is not good. Many false positives are captured.
-2) cpplint error in header guards and so was required to added full path as a string for the guard.
-
-# Installing Doxygen and generating doxygen documentation
+### How to run cpplint and cppcheck
+Use the below commands to run cppcheck and cpplint.
 ```
-$ git clone https://github.com/doxygen/doxygen.git
-$ cd doxygen
-$ mkdir build
-$ cd build
-$ cmake -G "Unix Makefiles" ..
-$ make
-$ sudo make install
-$ cd MidTermGroup-14
-$ doxygen -g DoxyConfig
+$ cd Human_Detection_OpenCV
+$ cpplint $( find . -name \*.hpp -or -name \*.cpp | grep -vE -e "^./results" -e "^./include/Eigen")
+$ cppcheck $( find . -name \*.hpp -or -name \*.cpp | grep -vE -e "^./results" -e "^./include/Eigen")
 ```
-The above commands are used to install doxygen and generate doxygen configuration file. This file has been provided in the repository as DoxyConfig with the required flags.
-To generate doxygen documentaion-
-```
-$ cd MidTermGroup-14
-$ doxygen DoxyConfig
-```
-We have already provided the generated documents in the "docs" directory in the repository.
-
-# Function that gives the world coordinates
-```
-A homogeneous matrix trasformation and lens formula are used to convert from the image cordinate
-to the world cordinate.
-The image origin is at the top left corner with positive x axis pointing towards right, and positive
-y axis pointing towards bottom.While the world coordinate (view point of robot) is set with origin
-at the center of view and positive x axis towards right and positive y axis pointing upwards.
-
-This give the roational matrix as
-R= [ 1  0  0
-     0 -1  0
-     0  0 -1]
-
-Translation from world origin to image origin
-T = [ -Image width /2
-      Image height /2
-	    0 	     ]
-
-Homogenenous matrix from image to world frame is :
-
-h= [ R T
-     0 1]
-
-World Cordinate = H* Image Cordinate (in pixel)
-(with depth z of detected object is assumed to be 8ft inside the image plane) 
-
-Units considered by us gives the world coordinates in feets.
-```
-
