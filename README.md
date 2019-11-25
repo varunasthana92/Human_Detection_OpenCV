@@ -1,7 +1,7 @@
 # Human Obstacle Detector Using OpenCV Haar Cascade
 
-[![Build Status](https://travis-ci.org/varunasthana92/Human_Detection_OpenCV.svg?branch=master)](https://travis-ci.org/varunasthana92/Human_Detection_OpenCV)
-[![Coverage Status](https://coveralls.io/repos/github/varunasthana92/Human_Detection_OpenCV/badge.svg?branch=master)](https://coveralls.io/github/varunasthana92/Human_Detection_OpenCV?branch=master)
+[![Build Status](https://travis-ci.org/varunasthana92/Human_Detection_OpenCV.svg?branch=GMock_Extra_Credit)](https://travis-ci.org/varunasthana92/Human_Detection_OpenCV)
+[![Coverage Status](https://coveralls.io/repos/github/varunasthana92/Human_Detection_OpenCV/badge.svg?branch=GMock_Extra_Credit)](https://coveralls.io/github/varunasthana92/Human_Detection_OpenCV?branch=GMock_Extra_Credit)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ---
