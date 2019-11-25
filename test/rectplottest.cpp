@@ -28,13 +28,79 @@
  */
 
 #include <gtest/gtest.h>
+#include <gmock/gmock.h>
+#include <string>
 #include "rectplot.hpp"
+#include "cam.hpp"
+
+using ::testing::Return;
+using ::testing::_;
+
+class MockCam : public Cam {
+ public:MOCK_METHOD1(readVideo,int(std::string dPath))
+  ;MOCK_METHOD1(readFrameImage,int(cv::Mat &img))
+  ;
+};
+
+TEST(RectPlotTest, mockCamFeed) {
+  MockCam mockCam; /**< Declare mock class object */
+  RectPlot a; /**< Declare RectPlot class object */
+  /**
+   * @brief Set the return value of readVideo method of mocked
+   * class to 1 such that the return of method feed is 2
+   */
+  EXPECT_CALL(mockCam,readVideo("xyz")).Times(1).WillOnce(Return(1));
+  EXPECT_EQ(2, a.feed(mockCam, "xyz"));
+}
+
+TEST(RectPlotTest, mockCamFeed1) {
+  MockCam mockCam; /**< Declare mock class object */
+  RectPlot a; /**< Declare RectPlot class object */
+  /**
+   * @brief Set the return value of readVideo method of mocked
+   * class to 0 such that the return of method feed is 3
+   */
+  EXPECT_CALL(mockCam,readVideo(_)).Times(1).WillOnce(Return(0));
+  EXPECT_EQ(3, a.feed(mockCam, "xyz"));
+}
+
+TEST(RectPlotTest, mockCamImg) {
+  MockCam mockCam; /**< Declare mock class object */
+  cv::Mat img; /**< Declare img variable of type cv::Mat */
+  RectPlot a; /**< Declare RectPlot class object */
+  /**
+   * @brief Set the return value of readFrameImage method of mocked
+   * class to 1 such that the return of method imgRead is 1
+   */
+  EXPECT_CALL(mockCam,readFrameImage(_)).Times(1).WillOnce(Return(1));
+  EXPECT_EQ(1, a.imgRead(mockCam, img));
+}
+
+TEST(RectPlotTest, mockCamImg1) {
+  MockCam mockCam; /**< Declare mock class object */
+  cv::Mat img; /**< Declare img variable of type cv::Mat */
+  RectPlot a; /**< Declare RectPlot class object */
+  /**
+   * @brief Set the return value of readFrameImage method of mocked
+   * class to 0 such that the return of method imgRead is 0
+   */
+  EXPECT_CALL(mockCam,readFrameImage(_)).Times(1).WillOnce(Return(0));
+  EXPECT_EQ(0, a.imgRead(mockCam, img));
+}
 
 TEST(RectPlotTest, testiplot) {
   RectPlot a;
   cv::Mat refImg1, refImg2, refImg3;
   refImg1 = cv::imread("../test/human01-01.png");
+  /**
+   * @brief Dummy data to check return value of plot method
+   * by passing an actual image
+   */
   EXPECT_DOUBLE_EQ(1, a.plot(refImg1, 10, 10, 10, 10));
+  /**
+   * @brief Dummy data to check return value of plot method
+   * by not passing any actual image
+   */
   EXPECT_DOUBLE_EQ(0, a.plot(refImg2, 10, 10, 10, 10));
 }
 
@@ -42,7 +108,19 @@ TEST(RectPlotTest, testiworldCord) {
   RectPlot a;
   cv::Mat refImg1, refImg2, refImg3;
   refImg1 = cv::imread("../test/human01-01.png");
+  /**
+   * @brief Dummy data to assert correct operation of the plot method
+   * by passing an actual image
+   */
   ASSERT_TRUE(a.plot(refImg1, 0, 0, 10, 10));
+  /**
+   * @brief Dummy data to check return value of worldCord method
+   * by passing an actual image
+   */
   EXPECT_DOUBLE_EQ(1, a.worldCord(refImg1));
+  /**
+   * @brief Dummy data to check return value of worldCord method
+   * by not passing any actual image
+   */
   EXPECT_DOUBLE_EQ(0, a.worldCord(refImg2));
 }
