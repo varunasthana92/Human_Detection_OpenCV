@@ -90,7 +90,7 @@ Training is a time demanding and computationally expensive process. Larger the n
 
 # How to build
 ```
-$ cd MidTermGroup-14
+$ cd Human_Detection_OpenCV
 $ mkdir build
 $ cd build
 $ cmake ..
@@ -98,13 +98,13 @@ $ make
 ```
 # How to run demo
 ```
-$ cd MidTermGroup-14
+$ cd Human_Detection_OpenCV
 $ cd build
 $ ./app/humanDetect
 ```
 # How to run tests
 ```
-$ cd MidTermGroup-14
+$ cd Human_Detection_OpenCV
 $ cd build
 $ ./test/cpp-test
 ```
@@ -122,13 +122,13 @@ $ cd build
 $ cmake -G "Unix Makefiles" ..
 $ make
 $ sudo make install
-$ cd MidTermGroup-14
+$ cd Human_Detection_OpenCV
 $ doxygen -g DoxyConfig
 ```
 The above commands are used to install doxygen and generate doxygen configuration file. This file has been provided in the repository as DoxyConfig with the required flags.
 To generate doxygen documentaion-
 ```
-$ cd MidTermGroup-14
+$ cd Human_Detection_OpenCV
 $ doxygen DoxyConfig
 ```
 We have already provided the generated documents in the "docs" directory in the repository.
