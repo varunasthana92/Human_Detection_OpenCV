@@ -27,8 +27,8 @@
  * SOFTWARE.
  */
 
-#ifndef _HOME_VARUN_ECLIPSE_WORKSPACE_OPENCV_INCLUDE_CASCADE_HPP_
-#define _HOME_VARUN_ECLIPSE_WORKSPACE_OPENCV_INCLUDE_CASCADE_HPP_
+#ifndef _INCLUDE_CASCADE_HPP_
+#define _INCLUDE_CASCADE_HPP_
 
 #include <string>
 #include <iostream>
@@ -66,4 +66,4 @@ class Cascade {
    */
   int objectDetect(std::vector<cv::Rect>&);
 };
-#endif  // _HOME_VARUN_ECLIPSE_WORKSPACE_OPENCV_INCLUDE_CASCADE_HPP_
+#endif  /* _INCLUDE_CASCADE_HPP_ */

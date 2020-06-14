@@ -72,7 +72,7 @@ Follow the below steps-
 </p>
 
 
-5) From the <model> run the below command in terminal to generate a vector file. Lets name that file as "positives.vec". Here -w and -h are the training model parameters (ensure that the object in positive instances have similar width/height ratio for better performance)
+5) From the <_model_> run the below command in terminal to generate a vector file. Lets name that file as "positives.vec". Here -w and -h are the training model parameters (ensure that the object in positive instances have similar width/height ratio for better performance)
 
 ```
 opencv_createsamples -info pos/info.lst -num 527 -w 36 -h 110 -vec positives.vec
@@ -111,7 +111,6 @@ $ ./test/cpp-test
 # Known issues/bugs
 
 1) With small set of training data, the quality of output is not good. Many false positives are captured.
-2) cpplint error in header guards and so was required to added full path as a string for the guard.
 
 # Installing Doxygen and generating doxygen documentation
 ```

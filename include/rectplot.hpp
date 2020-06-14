@@ -27,8 +27,8 @@
  * SOFTWARE.
  */
 
-#ifndef _HOME_VARUN_ECLIPSE_WORKSPACE_OPENCV_INCLUDE_RECTPLOT_HPP_
-#define _HOME_VARUN_ECLIPSE_WORKSPACE_OPENCV_INCLUDE_RECTPLOT_HPP_
+#ifndef _INCLUDE_RECTPLOT_HPP_
+#define _INCLUDE_RECTPLOT_HPP_
 
 #include <Eigen/Dense>
 #include <iomanip>
@@ -63,4 +63,4 @@ class RectPlot {
    */
   int worldCord(cv::Mat&);
 };
-#endif  // _HOME_VARUN_ECLIPSE_WORKSPACE_OPENCV_INCLUDE_RECTPLOT_HPP_
+#endif  /* _INCLUDE_RECTPLOT_HPP_ */
