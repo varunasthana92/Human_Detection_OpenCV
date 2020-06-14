@@ -137,7 +137,7 @@ We have already provided the generated documents in the "docs" directory in the 
 A homogeneous matrix trasformation and lens formula are used to convert from the image cordinate
 to the world cordinate.
 The image origin is at the top left corner with positive x axis pointing towards right, and positive
-y axis pointing towards bottom.While the world coordinate (view point of robot) is set with origin
+y axis pointing towards bottom. While the world coordinate (view point of robot) is set with origin
 at the center of view and positive x axis towards right and positive y axis pointing upwards.
 
 This give the roational matrix as
@@ -152,7 +152,7 @@ T = [ -Image width /2
 
 Homogenenous matrix from image to world frame is :
 
-h= [ R T
+H= [ R T
      0 1]
 
 World Cordinate = H* Image Cordinate (in pixel)
