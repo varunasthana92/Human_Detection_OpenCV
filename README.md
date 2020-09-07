@@ -10,8 +10,8 @@
 
 Project was part of the academic coursework ENPM808X Software Development for Robotics at the Univeristy of Maryland-College Park.
 <p align="center">
-<img src="https://github.com/varunasthana92/Human_Detection_OpenCV/blob/master/additional_files/sampleOutput.gif" height = 400>
-Sample output)
+<img src="https://github.com/varunasthana92/Human_Detection_OpenCV/blob/master/additional_files/sampleOutput.gif" height = 400><br>
+Sample output
 </p>
 
 Acme Robotics is developing a new series of robots to add to its portfolio– warehouse management robots (WMR). WMR's main function would be to carry goods from one place to another in a warehouse. One of the issue with such a market is: not all warehouses work on 100% automation, this means that WMRs would often be working in a workspace shared by humans. This raises the issue of safety for the humans working in the warehouse. As a safety counter-measure it is desired that WMRs should not collide with any human.
@@ -21,7 +21,7 @@ To achieve the goal of coallision avoidance of WMRs with humans, Acme Robotics r
 Our HD module works on the principles of supervised learning by utilizing Haar Cascade Classifier for object detection (humans in our case) from the OpenCV library. OpenCV library is covered under the 3-clause BSD License. HD module will use an on-board camera provided in the WMR to capture videos. But for our testing purposes, we will make use of a demo video. HD module will process the captured images (frame by frame) to detect the presence of any human, and then return their coordinates in the 2D-coordinate frame corresponding to the field of view of the robot. This data will contain bottom left (x,y) and top right (x,y) world coordinates of the enveloping rectangular box around the detected humans.
 
 <p align="center">
-<img src="https://github.com/varunasthana92/Human_Detection_OpenCV/blob/master/additional_files/expected_behaviour.png">
+<img src="https://github.com/varunasthana92/Human_Detection_OpenCV/blob/master/additional_files/expected_behaviour.png"><br>
 Expected behavior of the HD Module (Images from: Machine Learning by Andrew Ng, Coursera)
 </p>
 
