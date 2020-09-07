@@ -7,6 +7,13 @@
 ---
 
 ## Overview
+
+Project was part of the academic coursework ENPM808X Software Development for Robotics at the Univeristy of Maryland-College Park.
+<p align="center">
+<img src="https://github.com/varunasthana92/Human_Detection_OpenCV/blob/master/additional_files/sampleOutput.gif" height = 400>
+Sample output)
+</p>
+
 Acme Robotics is developing a new series of robots to add to its portfolio– warehouse management robots (WMR). WMR's main function would be to carry goods from one place to another in a warehouse. One of the issue with such a market is: not all warehouses work on 100% automation, this means that WMRs would often be working in a workspace shared by humans. This raises the issue of safety for the humans working in the warehouse. As a safety counter-measure it is desired that WMRs should not collide with any human.
 
 To achieve the goal of coallision avoidance of WMRs with humans, Acme Robotics reached out to our team to provide a ready to install solution. Our team is developing a Human Detector (HD) module which will identenfy the presence of any human in the vicinity of the robot (in its field of view) and provide the coordinates of the detected human in the robot's coordinate system. These coordinates can then be used by other modules of the WMR developed by Acme Robotics, like-real time path planning module, to modify the travel path of the WMR to avoid any possibility of a collision.
